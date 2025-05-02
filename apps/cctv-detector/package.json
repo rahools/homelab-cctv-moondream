@@ -1,0 +1,27 @@
+{
+    "name": "cctv-detector",
+    "type": "module",
+    "private": true,
+    "version": "0.1.0",
+    "scripts": {
+        "build": "nitro build",
+        "dev": "dotenv -- nitro dev --port 3002",
+        "lint": "eslint . --max-warnings 0",
+        "check-types": "tsc --noEmit"
+    },
+    "dependencies": {
+        "digest-fetch": "^3.1.1",
+        "h3": "^1.11.1",
+        "moondream": "latest",
+        "nitropack": "^2.9.1",
+        "node-fetch": "^3.3.2"
+    },
+    "devDependencies": {
+        "@repo/eslint-config": "workspace:*",
+        "@repo/typescript-config": "workspace:*",
+        "@types/node": "^22.15.3",
+        "dotenv-cli": "^8.0.0",
+        "eslint": "^9.25.0",
+        "typescript": "5.8.2"
+    }
+}

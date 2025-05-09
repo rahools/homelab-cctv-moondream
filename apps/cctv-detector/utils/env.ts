@@ -10,11 +10,10 @@ export const env = createEnv({
             .default("development"),
     },
     server: {
-        POSTGRES_URL: z.string().url(),
         CAMERA_IMAGE_URL: z.string().url(),
         CAMERA_USERNAME: z.string(),
         CAMERA_PASSWORD: z.string(),
-        CHECK_INTERVAL: z.string().transform((val) => parseInt(val)),
+        CHECK_INTERVAL: z.string().optional().default("5000").transform((val) => parseInt(val)),
         AUTH_DIGEST: z.string(),
         MOONDREAM_API_KEY: z.string(),
     },

@@ -1,4 +1,5 @@
 import { vl } from 'moondream';
+import { env } from './env';
 
 /**
  * Sends an image to the Moondream API to detect if there are humans in the image
@@ -9,7 +10,7 @@ import { vl } from 'moondream';
 export async function detectHumans(imageBuffer: Buffer): Promise<boolean> {
     try {
         // Get the API key from environment variables
-        const apiKey = process.env.MOONDREAM_API_KEY;
+        const apiKey = env.MOONDREAM_API_KEY;
         if (!apiKey) {
             throw new Error('MOONDREAM_API_KEY environment variable is not set');
         }
@@ -26,10 +27,17 @@ export async function detectHumans(imageBuffer: Buffer): Promise<boolean> {
             stream: false
         });
 
-        console.log('Moondream detection result:', result);
+        let resultString = '';
+        if (typeof result === 'string') {
+            resultString = result;
+        } else if (typeof result === 'object' && result !== null) {
+            resultString = JSON.stringify(result);
+        }
+
+        console.log('Moondream detection result:', resultString);
 
         // Parse the result to determine if humans are present
-        const answer = String(result).toLowerCase() || '';
+        const answer = resultString.toLowerCase() || '';
         return answer.includes('true');
     } catch (error) {
         console.error('Error detecting humans:', error);

@@ -1,50 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
+  --foreground-rgb: 0, 0, 0;
+  --background-rgb: 0, 0, 0;
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
+  color: rgb(var(--foreground-rgb));
+  background: rgb(var(--background-rgb));
 }
 
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
+/* CRT scan lines effect */
+.bg-scan-lines {
+  background: linear-gradient(to bottom, transparent 0%, rgba(0, 255, 0, 0.05) 50%, transparent 100%);
+  background-size: 100% 4px;
+  animation: scanlines 0.5s linear infinite;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-.imgDark {
-  display: none;
-}
-
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
+@keyframes scanlines {
+  0% {
+    background-position: 0 0;
   }
 
-  .imgLight {
-    display: none;
+  100% {
+    background-position: 0 4px;
   }
-  .imgDark {
-    display: unset;
-  }
+}
+
+/* Custom scrollbar for the retro look */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #111;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 0;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #444;
 }

@@ -1,0 +1,28 @@
+{
+    "$schema": "https://turborepo.org/schema.json",
+    "extends": [
+        "//"
+    ],
+    "tasks": {
+        "build": {
+            "dependsOn": [
+                "^build"
+            ],
+            "outputs": [
+                ".nitro/**",
+                ".output/**"
+            ]
+        },
+        "dev": {
+            "persistent": true
+        },
+        "globalEnv": [
+            "CAMERA_IMAGE_URL",
+            "CAMERA_USERNAME",
+            "CAMERA_PASSWORD",
+            "CHECK_INTERVAL",
+            "AUTH_DIGEST",
+            "MOONDREAM_API_KEY"
+        ]
+    }
+}

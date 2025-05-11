@@ -1,4 +1,6 @@
-import CCTVMonitor from "./components/cctv-monitor"
+import CCTVMonitor from "./_components/cctv-monitor"
+
+import "./globals.css"
 
 export default function Home() {
   return (

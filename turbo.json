@@ -29,5 +29,13 @@
       "cache": false,
       "persistent": true
     }
-  }
+  },
+  "globalEnv": [
+    "CAMERA_IMAGE_URL",
+    "CAMERA_USERNAME",
+    "CAMERA_PASSWORD",
+    "CHECK_INTERVAL",
+    "AUTH_DIGEST",
+    "MOONDREAM_API_KEY"
+  ]
 }

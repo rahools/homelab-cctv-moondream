@@ -1,6 +1,10 @@
 {
   "name": "homelab-cctv-moondream",
   "private": true,
+  "workspaces": [
+    "apps/cctv-detector",
+    "apps/web"
+  ],
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev",

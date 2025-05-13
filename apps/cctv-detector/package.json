@@ -4,7 +4,7 @@
     "private": true,
     "version": "0.1.0",
     "scripts": {
-        "build": "dotenv -- nitro build",
+        "build": "nitro build",
         "dev": "dotenv -- nitro dev --port 3002",
         "lint": "eslint . --max-warnings 0",
         "check-types": "tsc --noEmit"
@@ -25,5 +25,9 @@
         "dotenv-cli": "^8.0.0",
         "eslint": "^9.25.0",
         "typescript": "5.8.2"
+    },
+    "packageManager": "pnpm@9.0.0",
+    "engines": {
+        "node": ">=18"
     }
 }

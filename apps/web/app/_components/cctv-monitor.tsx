@@ -2,16 +2,20 @@
 
 import { useState, useEffect, useRef } from "react"
 import { AlertTriangle, Power, Wifi, WifiOff } from "lucide-react"
+import { SSE } from "sse.js"
+
 import AuthForm from "./auth-form"
 import ConnectionIndicator from "./connection-indicator"
 import HumanDetectionAlert from "./human-detection-alert"
 import StaticLoader from "./static-loader"
+import { env } from "../../env"
 
 interface CCTVEvent {
     image: string
     timestamp: string
     isHumanDetected: boolean
 }
+
 
 export default function CCTVMonitor() {
     const [authToken, setAuthToken] = useState<string>("")
@@ -21,7 +25,7 @@ export default function CCTVMonitor() {
     const [currentImage, setCurrentImage] = useState<string | null>(null)
     const [currentTime, setCurrentTime] = useState<string>("--:--:--")
     const [isHumanDetected, setIsHumanDetected] = useState<boolean>(false)
-    const eventSourceRef = useRef<EventSource | null>(null)
+    const eventSourceRef = useRef<SSE | null>(null)
     const audioRef = useRef<HTMLAudioElement | null>(null)
 
     useEffect(() => {
@@ -48,12 +52,13 @@ export default function CCTVMonitor() {
             setIsLoading(true)
             setError(null)
 
-            const eventSource = new EventSource("/api/cctv-stream", {
-                withCredentials: true,
+            console.log("Connecting to SSE...", env.NEXT_PUBLIC_SSE_URL)
+            const eventSource = new SSE(env.NEXT_PUBLIC_SSE_URL, {
+                withCredentials: false,
                 headers: {
-                    Authorization: `Bearer ${authToken}`,
+                    "authorization": `Bearer ${authToken}`,
                 },
-            } as EventSourceInit)
+            })
 
             eventSource.onopen = () => {
                 setIsConnected(true)

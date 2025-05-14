@@ -50,14 +50,23 @@ async function checkImage(): Promise<string> {
     }
 }
 
+// Function to set CORS headers
+function setCORSHeaders(res: any) {
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Access-Control-Allow-Methods", "GET, OPTIONS");
+    res.setHeader("Access-Control-Allow-Headers", "Authorization");
+    res.setHeader("Content-Type", "text/event-stream");
+    res.setHeader("Cache-Control", "no-cache");
+    res.setHeader("Connection", "keep-alive");
+    res.setHeader("Content-Encoding", "none");
+}
+
 // SSE endpoint handler
 export default defineEventHandler((event) => {
-    // Set headers for SSE
-    event.node.res.setHeader('Content-Type', 'text/event-stream');
-    event.node.res.setHeader('Cache-Control', 'no-cache');
-    event.node.res.setHeader('Connection', 'keep-alive');
-    event.node.res.setHeader('Content-Encoding', 'none');
-    event.node.res.setHeader('Access-Control-Allow-Origin', '*');
+    const res = event.node.res;
+
+    // Set CORS headers before handling the request
+    setCORSHeaders(res);
 
     // if OPTIONS request, return 200
     if (event.node.req.method === 'OPTIONS') {

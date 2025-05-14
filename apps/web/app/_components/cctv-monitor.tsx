@@ -56,7 +56,7 @@ export default function CCTVMonitor() {
             const eventSource = new SSE(env.NEXT_PUBLIC_SSE_URL, {
                 withCredentials: false,
                 headers: {
-                    "authorization": `Bearer ${authToken}`,
+                    Authorization: `Bearer ${authToken}`,
                 },
             })
 

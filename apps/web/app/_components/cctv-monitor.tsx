@@ -11,7 +11,7 @@ import StaticLoader from "./static-loader"
 import { env } from "../../env"
 
 interface CCTVEvent {
-    image: string
+    imageSrc: string
     timestamp: string
     isHumanDetected: boolean
 }
@@ -68,7 +68,8 @@ export default function CCTVMonitor() {
             eventSource.onmessage = (event) => {
                 try {
                     const data: CCTVEvent = JSON.parse(event.data)
-                    setCurrentImage(data.image)
+                    console.log("Received SSE event:", { ...data })
+                    setCurrentImage(data.imageSrc)
                     setCurrentTime(data.timestamp)
                     setIsHumanDetected(data.isHumanDetected)
                 } catch (err) {

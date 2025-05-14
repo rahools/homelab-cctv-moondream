@@ -1,4 +1,5 @@
 import { defineEventHandler } from 'h3';
+
 import { downloadImage } from '../../utils/imageDownloader';
 import { detectHumans } from '../../utils/moondreamClient';
 import { env } from '../../utils/env';
@@ -57,6 +58,13 @@ export default defineEventHandler((event) => {
     event.node.res.setHeader('Connection', 'keep-alive');
     event.node.res.setHeader('Content-Encoding', 'none');
     event.node.res.setHeader('Access-Control-Allow-Origin', '*');
+
+    // if OPTIONS request, return 200
+    if (event.node.req.method === 'OPTIONS') {
+        event.node.res.statusCode = 200;
+        event.node.res.end();
+        return 'OK';
+    }
 
     // check for auth
     if (event.node.req.headers.authorization !== `Bearer ${config.authDigest}`) {
